@@ -9,7 +9,7 @@ import { MessagesService } from './messages.service';
 })
 export class RegisterService {
 
-  private registerURL = '/register';
+  private registerURL = 'api/register';
   private httpOptions = {
     headers: new HttpHeaders(
       {
