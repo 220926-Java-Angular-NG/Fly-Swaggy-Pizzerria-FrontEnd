@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RegisterService } from 'src/app/services/register.service';
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-register',
