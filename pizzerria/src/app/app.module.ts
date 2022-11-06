@@ -8,6 +8,7 @@ import { LoginComponent } from './components/login/login.component';
 import { MessagesComponent } from './components/messages/messages.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartComponent } from './components/cart/cart.component';
+import { MenuComponent } from './components/menu/menu.component';
 
 @NgModule({
   declarations: [
@@ -15,7 +16,8 @@ import { CartComponent } from './components/cart/cart.component';
     RegisterComponent,
     LoginComponent,
     MessagesComponent,
-    CartComponent
+    CartComponent,
+    MenuComponent
   ],
   imports: [
     BrowserModule,
