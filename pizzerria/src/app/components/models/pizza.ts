@@ -8,34 +8,34 @@ export interface Pizza{
 }
 
 export const enum Size{
-    SMALL,
-    MEDIUM,
-    LARGE
+    SMALL = "SMALL",
+    MEDIUM = "MEDIUM",
+    LARGE = "LARGE"
 }
 
 export const enum Crust{
-    REGULAR,
-    THIN,
-    NO_CRUST
+    REGULAR = "REGULAR",
+    THIN = "THIN",
+    NO_CRUST = "NO_CRUST"
 }
 
 export const enum Sauce{
-    TOMATO,
-    BBQ,
-    ALFREDO,
-    BUFFALO
+    TOMATO = "TOMATO",
+    BBQ = "BBQ",
+    ALFREDO = "ALFREDO",
+    BUFFALO = "BUFFALO"
 }
 
 export const enum Topping{
-    PEPPERONI,
-    SAUSAGE,
-    MUSHROOMS,
-    BACON,
-    CHICKEN,
-    ONIONS,
-    BELL_PEPPERS,
-    PINEAPPLE,
-    JALAPENOS,
-    HAM,
-    FS_SEASONING
+    PEPPERONI = "PEPPERONI",
+    SAUSAGE = "SASUAGE",
+    MUSHROOMS = "MUSHROOMS",
+    BACON = "BACON",
+    CHICKEN = "CHICKEN",
+    ONIONS = "ONIONS",
+    BELL_PEPPERS = "BELL_PEPPERS",
+    PINEAPPLE = "PINEAPPLE",
+    JALAPENOS = "JALSPENOS",
+    HAM = "HAM",
+    FS_SEASONING = "FS_SEASONING"
 }

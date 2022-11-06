@@ -7,7 +7,8 @@ export const SPECALTY: Pizza[] = [
     sauce: Sauce.BBQ,
     toppings:[
         Topping.BACON,
-        Topping.PEPPERONI
+        Topping.PEPPERONI,
+        Topping.HAM
     ]},
     {
         size: Size.LARGE,
@@ -15,6 +16,16 @@ export const SPECALTY: Pizza[] = [
         sauce: Sauce.TOMATO,
         toppings:[
             Topping.BACON,
-            Topping.PEPPERONI
-        ]}
+            Topping.PEPPERONI,
+            Topping.FS_SEASONING
+        ]},
+        {
+            size: Size.MEDIUM,
+            crust: Crust.NO_CRUST,
+            sauce: Sauce.TOMATO,
+            toppings:[
+                Topping.BACON,
+                Topping.PEPPERONI,
+                Topping.FS_SEASONING
+            ]}
 ]
