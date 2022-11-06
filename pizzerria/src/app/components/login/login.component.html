@@ -1,1 +1,13 @@
-<p>login works!</p>
+<div >
+    <h3>Login</h3>
+    <form [formGroup]="loginForm">
+        <label for="username">Username: </label>
+        <input id="username" type="text" formControlName="username" required>
+        <br>
+        <label for="password">Password: </label>
+        <input id="password" type="password" formControlName="password" required>
+        <br>
+        <button type="button" (click)="login()">Login</button>
+        <button type="button" (click)="register()">Register</button>
+    </form>
+</div>
