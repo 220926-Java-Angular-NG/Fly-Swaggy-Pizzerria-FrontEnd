@@ -1,0 +1,15 @@
+<p>cart works!</p>
+
+<ul class="Cart">
+    <li *ngFor="let pizza of pizzas">
+        <p>{{pizza.size}}</p>
+        <p>{{pizza.crust}}</p>
+        <p>{{pizza.sauce}}</p>
+        <ul class="Cart">
+            <li *ngFor="let topping of pizza.toppings">
+                <p>{{topping}}</p>
+            </li>
+        </ul>
+    </li>
+    <button type="button" class="buy" title="buy" (click)="Purchase(pizzas)">Purchase</button>
+</ul>
