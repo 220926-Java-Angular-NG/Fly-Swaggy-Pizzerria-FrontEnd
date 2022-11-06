@@ -1,13 +1,14 @@
 import { LoginComponent } from "../login/login.component";
 
 export interface User{
-    id: number;
+    userId: number;
+    username: string;
+    password: string;
     firstName: string;
     lastName: string;
     email: string;
-    username: string;
-    password: string;
+    phoneNumber:string;
     address: string;
     address2: string;
-    zipcode: number;
+    zipCode: string;
 }

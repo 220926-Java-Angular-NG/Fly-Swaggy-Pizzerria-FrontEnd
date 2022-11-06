@@ -1,39 +1,35 @@
-
-<h1>Testing</h1>
+<p>register works!</p>
+<h3>Please fill the form</h3>
 <div>
-    <label for="first-name">First Name</label><br>
-    <input id="firstname" #firstName placeholder="first name"><br>
-    <label for="last-name">Last Name</label><br>
-    <input id="lastname" #lastName placeholder="last name"><br>
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
 
+      <label for="username">Username: </label>
+      <input id="username" type="text" formControlName="username" required>
 
-    <label for="email">Email</label><br>
-    <input id="email" type="email" #email placeholder="email"><br>
-    <label for="password">Password</label><br>
-    <input id="password" type="password" #password placeholder="password"><br>
+      <label for="password">Password: </label>
+      <input id="password" type="password" formControlName="password" required>
 
-
-
-    <label for="street-address-1">Street Address</label><br>
-    <input id="street-address-1" #streetAddress1 placeholder="Street Address"><br>
-
-    <label for="street-address-2">Street Address 2</label><br>
-    <input id="street-address-2" #streetAddress2 placeholder="--"><br>
-
-    <label for="city">City</label><br>
-    <input id="city" #city placeholder="city"><br>
-
-    <label for="state">State</label><br>
-    <input id="state" type="text" #state maxlength="2" placeholder="state"><br>
-
-    <label for="ZIP">ZIP</label><br>
-    <input id="ZIP" type="number" #ZIP maxlength="5" placeholder="ZIP"><br>
-
+      <label for="first-name">First Name: </label>
+      <input id="first-name" type="text" formControlName="firstName" required>
+    
+      <label for="last-name">Last Name: </label>
+      <input id="last-name" type="text" formControlName="lastName">
+      
+      
+      
+      <label for="street">Street: </label>
+      <input id="street" type="text" formControlName="street">
+  
+      <label for="city">City: </label>
+      <input id="city" type="text" formControlName="city">
+  
+      <label for="state">State: </label>
+      <input id="state" type="text" formControlName="state">
+  
+      <label for="zip">Zip Code: </label>
+      <input id="zip"type="text" formControlName="zip">
+      
+      <p>Complete the form to enable button.</p>
+      <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+      </form>
 </div>
-
-
-<!-- 
-email: string;
-password: string;
-address: string;
-isMember: boolean; -->
