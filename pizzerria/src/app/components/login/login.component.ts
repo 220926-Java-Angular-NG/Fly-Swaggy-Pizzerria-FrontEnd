@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   login() { 
     this.userService.login(`${this.loginData.username.value} ${this.loginData.password.value}`)
     .subscribe((loggedUser: User) => localStorage.setItem("currentUser", JSON.stringify(loggedUser)));
-    
   }
 
   register() {
