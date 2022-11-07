@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cartService/cart.service';
 import { DataService } from 'src/app/services/dataService/data.service';
-import { SPECALTY } from '../models/DemoPizza';
+import { MessagesService } from 'src/app/services/messages.service';
 import { Pizza, Size} from '../models/pizza';
 import { PizzaBox } from '../models/pizzaBox';
+import { Cart } from '../models/Cart';
 
 @Component({
   selector: 'app-cart',
@@ -12,19 +13,31 @@ import { PizzaBox } from '../models/pizzaBox';
 })
 export class CartComponent implements OnInit {
   subtotal:number = 0;
-pizzasboxes: PizzaBox[] = []
-  constructor(private cartService:CartService, private data:DataService) { }
+  pizzasboxes: PizzaBox[] = []
+  constructor(private cartService:CartService, private data:DataService, private message:MessagesService) { }
   Purchase(pizzaBoxes: PizzaBox[]){
     if(this.subtotal > 0){
       var pizzas:Pizza[] = [];
+      var ret:Cart = {
+        ID:-1,
+        pizzas:[],
+        total:"-1"
+      }
       pizzaBoxes.forEach(box => {
         pizzas.push(this.toPizza(box))
       });
-      this.cartService.purchase(pizzas, this.formatter.format(this.subtotal)).subscribe() // todo: eventually handel not being able to recieve pizza
+      this.cartService.purchase(pizzas, this.formatter.format(this.subtotal)).subscribe(response =>ret = response) // todo: eventually handel not being able to recieve pizza
+      if(ret.pizzas == pizzas){ // purchase was successful
       this.pizzasboxes = []; // nuke the cart
       this.data.changedata(this.pizzasboxes); // nuke the shared data
+      this.subtotal = 0;
+      this.message.add("Purchase recieved");
+      } else{
+        this.message.add("Order could not be fufilled, Not enough Ingredients");
+      }
     } else {
-      //todo notify user that cart is empty
+      //todo message user that cart is empty
+      this.message.add("Can't buy nothing");
     }
   }
 
