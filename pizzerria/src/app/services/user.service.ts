@@ -9,8 +9,9 @@ import { MessagesService } from './messages.service';
 })
 export class UserService {
 
-  private loginURL = 'http://localhost:8080';
-  private httpOptions = {
+  private loginURL = 'http://localhost:8080/';
+
+private httpOptions = {
     headers: new HttpHeaders(
       {
       'Content-Type': 'application/json'
@@ -23,7 +24,7 @@ export class UserService {
   login(credentials: string): Observable<User> {
 
 
-   return this.http.post<User>(`${this.loginURL}/users/login`, credentials, this.httpOptions)
+   return this.http.post<User>(`${this.loginURL}users/login`, credentials, this.httpOptions)
    .pipe(
       tap( (loggedUser: User) => localStorage.setItem("userId", `${loggedUser.userId}`)),
       catchError(this.handleError<User>('login')) 
@@ -33,7 +34,7 @@ export class UserService {
   register(user: User): Observable<User> {
 
     return this.http.post<User>
-    (`${this.loginURL}/users/register`, JSON.stringify(user), this.httpOptions)
+    (`${this.loginURL}users/register`, JSON.stringify(user), this.httpOptions)
     .pipe(catchError(this.handleError<User>('register')));
 
   }
@@ -57,8 +58,13 @@ export class UserService {
 
   public updateUser(user: User): Observable <any> {
     
-    return this.http.put(`${this.loginURL}/users/{userId}/profile`, user, this.httpOptions)
+    return this.http.put(`${this.loginURL}users/myProfile`, user, this.httpOptions)
     .pipe(tap(_ => this.log(`Updated user with username: ${user.username}`)),
+    catchError(this.handleError<any>(`updateUser`)));
+  }
+ 
+  public findUser(userID?:String): Observable<any>{
+    return this.http.get(`${this.loginURL}users/${userID}`, this.httpOptions).pipe(tap(_ => this.log(`found user with ID: ${userID}`)),
     catchError(this.handleError<any>(`updateUser`)));
   }
 
