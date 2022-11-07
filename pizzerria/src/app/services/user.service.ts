@@ -55,9 +55,14 @@ export class UserService {
 
   public updateUser(user: User): Observable <any> {
     
-    return this.http.put(`${this.loginURL}users/{userId}/profile`, user, this.httpOptions)
+    return this.http.put(`${this.loginURL}users/myProfile`, user, this.httpOptions)
     .pipe(tap(_ => this.log(`Updated user with username: ${user.username}`)),
     catchError(this.handleError<any>(`updateUser`)));
   }
-  
+ 
+  public findUser(userID?:String): Observable<any>{
+    return this.http.get(`${this.loginURL}users/${userID}`, this.httpOptions).pipe(tap(_ => this.log(`found user with ID: ${userID}`)),
+    catchError(this.handleError<any>(`updateUser`)));
+  }
+
 }
