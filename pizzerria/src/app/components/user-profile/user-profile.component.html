@@ -8,7 +8,7 @@
     <hr>
     <div class = "userInfo">
         <p>Change user info below! Hit 'Save' button below to confirm changes.</p>
-        <form [formGroup]="editProfileForm">
+        <form [formGroup]="editProfileForm" (ngSubmit) = "saveChanges()">
             <label for="firstName">First Name: </label>
             <input id="firstName" type="text" [(ngModel)]="user.firstName" value = {{user.firstName}} formControlName="firstName" required>
             <br>
@@ -18,11 +18,11 @@
             <br>
             <br>
             <label for="username">Username: </label>
-            <input id="username" type="text" [(ngModel)]="user.username" formControlName="username" required>
+            <input readonly id="username" type="text" [(ngModel)]="user.username" formControlName="username" required>
             <br>
             <br>
             <label for="password">Password: </label>
-            <input id="password" type="password" [(ngModel)]="user.password" formControlName="password" required>
+            <input readonly id="password" type="password" [(ngModel)]="user.password" formControlName="password" required>
             <br>
             <br>
             <label for="email">Email: </label>
@@ -45,7 +45,7 @@
             <input id="zipCode" type="text" [(ngModel)]="user.zipCode" formControlName="zipCode" required>
             <br>
             <br>
-            <button type="button" (click)="saveChanges()">Save</button>
+            <button type="submit" (click)="saveChanges()">Save</button>
         </form>
 
 
