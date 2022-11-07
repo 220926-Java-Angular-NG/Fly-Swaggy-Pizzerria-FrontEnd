@@ -6,7 +6,8 @@ export const SPECALTY: Recipe[] = [
         sauce: Sauce.TOMATO,
         toppings:[
             Topping.PEPPERONI,
-            Topping.BACON
+            Topping.BACON,
+            Topping.FS_SEASONING
         ]
     },
     {
