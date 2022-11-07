@@ -33,8 +33,7 @@ constructor(private fb:FormBuilder, private userService: UserService) {
    }
 
 ngOnInit(): void {
-  this.userService.findUser(`${localStorage.getItem("userID")}`).subscribe(init=>this.user=init);
-  
+  this.userService.findUser(`${localStorage.getItem("userId")}`).subscribe(init=>this.user=init);
 }
 
 getEditProfileForm(){
@@ -44,7 +43,6 @@ getEditProfileForm(){
 saveChanges(): void {
   if(this.user) {
     this.userService.updateUser(this.user).subscribe();
-    console.log(this.user.zipCode);
   }
 }
 

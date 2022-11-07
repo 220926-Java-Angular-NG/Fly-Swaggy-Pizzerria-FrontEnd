@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Fly and Swaggy Pizzeria';
-  user = "test";
+  user = localStorage.getItem("token");
 }
