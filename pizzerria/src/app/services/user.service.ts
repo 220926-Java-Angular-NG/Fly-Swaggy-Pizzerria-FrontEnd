@@ -25,7 +25,7 @@ export class UserService {
 
    return this.http.post<User>(`${this.loginURL}/users/login`, credentials, this.httpOptions)
    .pipe(
-      tap( (loggedUser: User) => localStorage.setItem("currentUser", `${loggedUser.username}`)),
+      tap( (loggedUser: User) => localStorage.setItem("userId", `${loggedUser.userId}`)),
       catchError(this.handleError<User>('login')) 
    );
   }
