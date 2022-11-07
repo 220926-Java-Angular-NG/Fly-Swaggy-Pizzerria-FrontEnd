@@ -1,1 +1,27 @@
 <p>menu works!</p>
+<div class="grid">
+    <ng-container *ngFor="let recipe of specals">
+        <div>
+            <p>{{recipe.name}}</p>
+            <div>
+                <p>Size</p>            
+                <label>small</label>
+                <input type="radio" name = "size" value = Size.SMALL>
+                <label>medium</label>
+                <input type="radio" name = "size" value = Size.MEDIUM>
+                <label>large</label>
+                <input type="radio" name = "size" value = Size.LARGE>
+            </div>
+            <div>  
+                <p>Crust</p>          
+                <label>No Crust</label>
+                <input type="radio" name = "crust" value = Crust.NO_CRUST>
+                <label>Regular</label>
+                <input type="radio" name = "crust" value = Crust.REGULAR>
+                <label>Thin</label>
+                <input type="radio" name = "crust" value = Crust.THIN>
+            </div>
+            <button type="button" (click)="add(recipe)">add</button>
+        </div>
+    </ng-container>
+</div>
