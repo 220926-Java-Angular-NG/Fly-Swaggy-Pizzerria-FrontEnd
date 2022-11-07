@@ -1,31 +1,45 @@
 import { Pizza, Sauce, Size, Crust, Topping} from "./pizza";
+import { PizzaBox } from "./pizzaBox";
+import { Recipe } from "./Recipe";
 
-export const SPECALTY: Pizza[] = [
+export const SPECALTY: PizzaBox[] = [
     {
-    size: Size.SMALL,
-    crust: Crust.REGULAR,
-    sauce: Sauce.BBQ,
-    toppings:[
-        Topping.BACON,
-        Topping.PEPPERONI,
-        Topping.HAM
-    ]},
-    {
-        size: Size.LARGE,
-        crust: Crust.NO_CRUST,
+    size: Size.LARGE,
+    name: "",
+    crust: Crust.NO_CRUST,
+    price:0,
+    recipe:{
+        name:"",
         sauce: Sauce.TOMATO,
         toppings:[
             Topping.BACON,
             Topping.PEPPERONI,
             Topping.FS_SEASONING
-        ]},
-        {
-            size: Size.MEDIUM,
-            crust: Crust.NO_CRUST,
-            sauce: Sauce.TOMATO,
-            toppings:[
-                Topping.BACON,
-                Topping.PEPPERONI,
-                Topping.FS_SEASONING
-            ]}
+        ]}},
+    {
+    size: Size.MEDIUM,
+    name: "",
+    crust: Crust.NO_CRUST,
+    price:0,
+    recipe:{
+        name: "",
+        sauce: Sauce.TOMATO,
+        toppings:[
+            Topping.BACON,
+            Topping.PEPPERONI,
+            Topping.HAM,
+            Topping.CHICKEN
+            ]}},
+    {
+    size: Size.SMALL,
+    name: "",
+    crust: Crust.NO_CRUST,
+    price:0,
+    recipe:{
+        name: "",
+        sauce: Sauce.TOMATO,
+        toppings:[
+            Topping.BACON,
+            Topping.PEPPERONI
+        ]}}
 ]
