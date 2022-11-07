@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder, Validators } from '@angular/forms';
+import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../models/user';
@@ -15,9 +15,7 @@ export class LoginComponent implements OnInit {
   @Input() loggedUser?: User;
   loginForm = this.fb.group({
     username:[''],
-    password:['', Validators.required, Validators.pattern(
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
-      )]
+    password:['']
   });
   
   constructor(private fb:FormBuilder, private router:Router, private userService: UserService){}
