@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cartService/cart.service';
+import { DataService } from 'src/app/services/dataService/data.service';
 import { SPECALTY } from '../models/DemoPizza';
 import { Pizza, Size} from '../models/pizza';
 import { PizzaBox } from '../models/pizzaBox';
-
 
 @Component({
   selector: 'app-cart',
@@ -13,11 +13,8 @@ import { PizzaBox } from '../models/pizzaBox';
 export class CartComponent implements OnInit {
 
 pizzas: PizzaBox[] = []
-formatter = new Intl.NumberFormat('en-US',{
-  style: 'currency',
-  currency:'USD'
-});
-  constructor(private cartService:CartService) { }
+
+  constructor(private cartService:CartService, private data:DataService) { }
   Purchase(pizzaBoxes: PizzaBox[]){
     var subtotal:number = 0;
     var pizzas:Pizza[] = [];
@@ -25,23 +22,11 @@ formatter = new Intl.NumberFormat('en-US',{
       pizzas.push(this.toPizza(box))
       subtotal = subtotal + box.price;
     });
-    this.cartService.purchase(pizzas, this.formatter.format(subtotal)).subscribe(
-      
-    )
+    this.cartService.purchase(pizzas, this.formatter.format(subtotal)).subscribe() // todo: eventually handel not being able to recieve pizza
   }
 
-  toPizza(pizzaBox: PizzaBox):Pizza{
-    let pizza:Pizza
-    pizza = {
-      size: pizzaBox.size,
-      crust: pizzaBox.crust,
-      sauce: pizzaBox.recipe.sauce,
-      toppings: pizzaBox.recipe.toppings
-    }
-      return pizza;
-  }
   ngOnInit(): void {
-    this.pizzas = SPECALTY;
+    this.data.sharedata.subscribe(box=>this.pizzas=box)
     this.pizzas.forEach(box => { // if the box comes in without price, price it
       if(box.price == 0){
         calculate_price(box)
@@ -52,6 +37,21 @@ formatter = new Intl.NumberFormat('en-US',{
     })
   }
 
+  formatter = new Intl.NumberFormat('en-US',{ // formats price to be displayed
+    style: 'currency',
+    currency:'USD'
+  });
+
+  toPizza(pizzaBox: PizzaBox):Pizza{ // unboxes pizza box to plain pizza for database
+    let pizza:Pizza
+    pizza = {
+      size: pizzaBox.size,
+      crust: pizzaBox.crust,
+      sauce: pizzaBox.recipe.sauce,
+      toppings: pizzaBox.recipe.toppings
+    }
+      return pizza;
+  }
 }
 
 function calculate_price(Box:PizzaBox){
