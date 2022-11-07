@@ -10,7 +10,8 @@ import { MessagesService } from './messages.service';
 export class UserService {
 
   private loginURL = 'http://localhost:8080/';
-  private httpOptions = {
+
+private httpOptions = {
     headers: new HttpHeaders(
       {
       'Content-Type': 'application/json'
@@ -25,14 +26,16 @@ export class UserService {
 
    return this.http.post<User>(`${this.loginURL}users/login`, credentials, this.httpOptions)
    .pipe(
-      tap( (loggedUser: User) => localStorage.setItem("token", `${loggedUser.username}`)),
+      tap( (loggedUser: User) => localStorage.setItem("userId", `${loggedUser.userId}`)),
       catchError(this.handleError<User>('login')) 
    );
   }
 
-  register(user: User) {
+  register(user: User): Observable<User> {
 
-    
+    return this.http.post<User>
+    (`${this.loginURL}users/register`, JSON.stringify(user), this.httpOptions)
+    .pipe(catchError(this.handleError<User>('register')));
 
   }
 
