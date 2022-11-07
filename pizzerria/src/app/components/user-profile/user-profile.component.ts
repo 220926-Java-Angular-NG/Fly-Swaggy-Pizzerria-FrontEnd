@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { MessagesService } from 'src/app/services/messages.service';
-import { UserProfileService } from 'src/app/services/user-profile.service';
 import { UserService } from 'src/app/services/user.service';
 import { Demo } from '../models/demo-user';
 import { User } from '../models/user';

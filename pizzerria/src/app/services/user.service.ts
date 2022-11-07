@@ -9,7 +9,7 @@ import { MessagesService } from './messages.service';
 })
 export class UserService {
 
-  private loginURL = 'http://localhost:8080/api/';
+  private loginURL = 'http://localhost:8080/';
   private httpOptions = {
     headers: new HttpHeaders(
       {
@@ -23,7 +23,7 @@ export class UserService {
   login(credentials: string): Observable<User> {
 
 
-   return this.http.post<User>(`${this.loginURL}/users/login`, credentials, this.httpOptions)
+   return this.http.post<User>(`${this.loginURL}users/login`, credentials, this.httpOptions)
    .pipe(
       tap( (loggedUser: User) => localStorage.setItem("token", `${loggedUser.username}`)),
       catchError(this.handleError<User>('login')) 
@@ -55,9 +55,9 @@ export class UserService {
 
   public updateUser(user: User): Observable <any> {
     
-    return this.http.put(`${this.loginURL}/users/{userId}/profile`, user, this.httpOptions)
+    return this.http.put(`${this.loginURL}users/{userId}/profile`, user, this.httpOptions)
     .pipe(tap(_ => this.log(`Updated user with username: ${user.username}`)),
     catchError(this.handleError<any>(`updateUser`)));
   }
-
+  
 }
