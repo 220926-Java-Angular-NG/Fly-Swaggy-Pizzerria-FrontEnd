@@ -53,8 +53,11 @@ export class UserService {
     }
   }
 
-  private updateUser(user: User) {
-    return this.http.put(`${this.loginURL}/users/{userId}/profile`, user);
+  public updateUser(user: User): Observable <any> {
+    
+    return this.http.put(`${this.loginURL}/users/{userId}/profile`, user, this.httpOptions)
+    .pipe(tap(_ => this.log(`Updated user with username: ${user.username}`)),
+    catchError(this.handleError<any>(`updateUser`)));
   }
 
 }
