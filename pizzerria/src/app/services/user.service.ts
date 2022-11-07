@@ -33,7 +33,7 @@ export class UserService {
   register(user: User): Observable<User> {
 
     return this.http.post<User>
-    (`${this.loginURL}users/register`, JSON.stringify(user), this.httpOptions)
+    (`${this.loginURL}/users/register`, JSON.stringify(user), this.httpOptions)
     .pipe(catchError(this.handleError<User>('register')));
 
   }
