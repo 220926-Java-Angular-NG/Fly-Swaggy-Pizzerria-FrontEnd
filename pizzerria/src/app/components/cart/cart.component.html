@@ -1,15 +1,18 @@
 <p>cart works!</p>
 
 <ul class="Cart">
-    <li *ngFor="let pizza of pizzas">
-        <p>{{pizza.size}}</p>
-        <p>{{pizza.crust}}</p>
-        <p>{{pizza.sauce}}</p>
+    <li *ngFor="let pizza of pizzasboxes">
+        <p>{{pizza.name}}</p>
+        <P>{{formatter.format(pizza.price)}}</P>
+        <p>{{pizza.size.toLowerCase()}}</p>
+        <p>{{pizza.crust.toLowerCase().replace('_',' ')}}</p>
+        <p>{{pizza.recipe.sauce.toLowerCase()}}</p>
         <ul class="Cart">
-            <li *ngFor="let topping of pizza.toppings">
-                <p>{{topping}}</p>
+            <li *ngFor="let topping of pizza.recipe.toppings">
+                <p>{{topping.toLowerCase().replace('fs_seasoning', 'Fly and Swaggy Sauce')}}</p>
             </li>
         </ul>
+        <button type="button" (click)="Remove(pizza)">X</button>
     </li>
-    <button type="button" class="buy" title="buy" (click)="Purchase(pizzas)">Purchase</button>
+    <button type="button" class="buy" title="buy" (click)="Purchase(pizzasboxes)">Purchase</button>
 </ul>

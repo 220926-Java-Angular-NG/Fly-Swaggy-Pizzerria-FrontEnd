@@ -16,10 +16,12 @@ private httpOptions = {
   )
 };
 
-purchase(pizzas: Pizza[]): Observable<Cart>{
+purchase(pizzas: Pizza[], total: String): Observable<Cart>{
   let cart: Cart
   cart={
-    pizzas:pizzas
+    ID:0,
+    pizzas:pizzas,
+    total: total
   }
   return this.http.post<Cart>(this.url,cart,this.httpOptions).pipe(catchError(this.handelError('purchase',cart)))
 }
