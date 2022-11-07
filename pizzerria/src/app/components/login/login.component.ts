@@ -1,7 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
+import { User } from '../models/user';
 
 
 @Component({
@@ -11,6 +12,7 @@ import { UserService } from 'src/app/services/user.service';
 })
 export class LoginComponent implements OnInit {
 
+  @Input() loggedUser?: User;
   loginForm = this.fb.group({
     username:['', Validators.required, Validators.minLength(5)],
     password:['', Validators.required, Validators.pattern(
@@ -30,11 +32,9 @@ export class LoginComponent implements OnInit {
   }
   
 
-  login() {
-    
-    localStorage.setItem("username", `${this.loginData.username.value}`);
-    localStorage.setItem("password", `${this.loginData.password.value}`);  
-    this.userService.login(`${localStorage.getItem('username')} ${localStorage.getItem('password')}`);
+  login() { 
+    this.userService.login(`${this.loginData.username.value} ${this.loginData.password.value}`)
+    .subscribe((loggedUser: User) => localStorage.setItem("currentUser", JSON.stringify(loggedUser)));
     
   }
 
