@@ -1,0 +1,22 @@
+ <div>
+     <h2>Forgot your password?</h2>
+     <br>
+     <br>
+     <p>Fill out information to verify your account below!</p>
+     <br>
+     <br>
+     <form [formGroup] = "verifyUser">
+          <label for="lastName">Last Name: </label>
+          <input required type="text" placeholder="Last Name" formControlName = "lastName">
+               <br>
+               <br>
+          <label for="email">Email: </label>
+          <input required type="text" id="email" placeholder="Email" formControlName = "email">
+               <br>
+               <br>
+          <button type="submit" id="verification-button"> Submit </button>
+     </form>
+</div>
+
+
+
