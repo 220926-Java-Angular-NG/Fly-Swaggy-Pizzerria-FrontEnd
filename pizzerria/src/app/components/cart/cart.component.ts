@@ -1,9 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from 'src/app/services/cartService/cart.service';
 import { DataService } from 'src/app/services/dataService/data.service';
-import { SPECALTY } from '../models/DemoPizza';
+import { MessagesService } from 'src/app/services/messages.service';
 import { Pizza, Size} from '../models/pizza';
 import { PizzaBox } from '../models/pizzaBox';
+import { Cart } from '../models/Cart';
 
 @Component({
   selector: 'app-cart',
@@ -11,26 +12,40 @@ import { PizzaBox } from '../models/pizzaBox';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-
-pizzasboxes: PizzaBox[] = []
-
-  constructor(private cartService:CartService, private data:DataService) { }
+  subtotal:number = 0;
+  pizzasboxes: PizzaBox[] = []
+  constructor(private cartService:CartService, private data:DataService, private message:MessagesService) { }
   Purchase(pizzaBoxes: PizzaBox[]){
-    var subtotal:number = 0;
-    var pizzas:Pizza[] = [];
-    pizzaBoxes.forEach(box => {
-      pizzas.push(this.toPizza(box))
-      subtotal = subtotal + box.price;
-    });
-    this.cartService.purchase(pizzas, this.formatter.format(subtotal)).subscribe() // todo: eventually handel not being able to recieve pizza
-    this.pizzasboxes = []; // nuke the cart
-    this.data.changedata(this.pizzasboxes); // nuke the shared data
+    if(this.subtotal > 0){
+      var pizzas:Pizza[] = [];
+      var ret:Cart = {
+        ID:-1,
+        pizzas:[],
+        total:"-1"
+      }
+      pizzaBoxes.forEach(box => {
+        pizzas.push(this.toPizza(box))
+      });
+      this.cartService.purchase(pizzas, this.formatter.format(this.subtotal)).subscribe(response =>ret = response) // todo: eventually handel not being able to recieve pizza
+      if(ret.pizzas == pizzas){ // purchase was successful
+      this.pizzasboxes = []; // nuke the cart
+      this.data.changedata(this.pizzasboxes); // nuke the shared data
+      this.subtotal = 0;
+      this.message.add("Purchase recieved");
+      } else{
+        this.message.add("Order could not be fufilled, Not enough Ingredients");
+      }
+    } else {
+      //todo message user that cart is empty
+      this.message.add("Can't buy nothing");
+    }
   }
 
   Remove(pizza:PizzaBox){
     const index = this.pizzasboxes.indexOf(pizza,0)
     if(index > -1){
       this.pizzasboxes.splice(index,1);
+      this.subtotal = this.subtotal - pizza.price;
     }
   }
 
@@ -43,6 +58,7 @@ pizzasboxes: PizzaBox[] = []
       if(box.name == ""){ // if the pizza didn't have a name call it custom
         box.name = "Custom"
       }
+      this.subtotal = this.subtotal + box.price;
     })
   }
 
