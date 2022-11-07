@@ -12,7 +12,7 @@ import { PizzaBox } from '../models/pizzaBox';
 })
 export class CartComponent implements OnInit {
 
-pizzas: PizzaBox[] = []
+pizzasboxes: PizzaBox[] = []
 
   constructor(private cartService:CartService, private data:DataService) { }
   Purchase(pizzaBoxes: PizzaBox[]){
@@ -23,11 +23,20 @@ pizzas: PizzaBox[] = []
       subtotal = subtotal + box.price;
     });
     this.cartService.purchase(pizzas, this.formatter.format(subtotal)).subscribe() // todo: eventually handel not being able to recieve pizza
+    this.pizzasboxes = []; // nuke the cart
+    this.data.changedata(this.pizzasboxes); // nuke the shared data
+  }
+
+  Remove(pizza:PizzaBox){
+    const index = this.pizzasboxes.indexOf(pizza,0)
+    if(index > -1){
+      this.pizzasboxes.splice(index,1);
+    }
   }
 
   ngOnInit(): void {
-    this.data.sharedata.subscribe(box=>this.pizzas=box)
-    this.pizzas.forEach(box => { // if the box comes in without price, price it
+    this.data.sharedata.subscribe(box=>this.pizzasboxes=box)
+    this.pizzasboxes.forEach(box => { // if the box comes in without price, price it
       if(box.price == 0){
         calculate_price(box)
       }

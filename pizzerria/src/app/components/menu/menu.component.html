@@ -1,26 +1,37 @@
 <p>menu works!</p>
+<P>Prices:</P>
+<p>Small are $8</p>
+<p>Medium are $13</p>
+<p>Large are $18</p>
+<div>
+    <p>Size</p>            
+    <label>small</label>
+    <input type="radio" name = "size" value = SMALL checked [(ngModel)] ="size">
+    <label>medium</label>
+    <input type="radio" name = "size" value = MEDIUM [(ngModel)] ="size">
+    <label>large</label>
+    <input type="radio" name = "size" value = LARGE [(ngModel)] ="size">
+</div>
+<div>  
+    <p>Crust</p>          
+    <label>No Crust</label>
+    <input type="radio" name = "crust" value = NO_CRUST checked [(ngModel)] ="crust">
+    <label>Regular</label>
+    <input type="radio" name = "crust" value = REGULAR [(ngModel)] ="crust">
+    <label>Thin</label>
+    <input type="radio" name = "crust" value = THIN [(ngModel)] ="crust">
+</div>
 <div class="grid">
     <ng-container *ngFor="let recipe of specals">
         <div>
-            <p>{{recipe.name}}</p>
-            <div>
-                <p>Size</p>            
-                <label>small</label>
-                <input type="radio" name = "size" value = Size.SMALL>
-                <label>medium</label>
-                <input type="radio" name = "size" value = Size.MEDIUM>
-                <label>large</label>
-                <input type="radio" name = "size" value = Size.LARGE>
+            <b>{{recipe.name}}</b>
+            <p>{{recipe.sauce.toLowerCase()}}</p>
+            <div class = "grid">
+            <p *ngFor="let topping of recipe.toppings">
+                {{topping.toLowerCase().replace('fs_seasoning', 'Fly and Swaggy Sauce')}}
+            </p>
             </div>
-            <div>  
-                <p>Crust</p>          
-                <label>No Crust</label>
-                <input type="radio" name = "crust" value = Crust.NO_CRUST>
-                <label>Regular</label>
-                <input type="radio" name = "crust" value = Crust.REGULAR>
-                <label>Thin</label>
-                <input type="radio" name = "crust" value = Crust.THIN>
-            </div>
+            <p></p>
             <button type="button" (click)="add(recipe)">add</button>
         </div>
     </ng-container>
