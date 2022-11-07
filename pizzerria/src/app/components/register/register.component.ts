@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { RegisterService } from 'src/app/services/register.service';
 import { Location } from '@angular/common';
+import { FormBuilder, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-register',
@@ -10,12 +11,22 @@ import { Location } from '@angular/common';
 })
 export class RegisterComponent implements OnInit {
 
-  constructor(
-    private registerService: RegisterService,
-    private location: Location
-  ) { }
+  registerForm = this.fb.group({
+    
+    firstName: ['', Validators.required],
+    lastName: [''],
+      street: [''],
+      city: [''],
+      state: [''],
+      zip: ['']
+    });
+
+  constructor(private fb:FormBuilder) { 
+  
+   }
 
   ngOnInit(): void {
   }
+  onSubmit() {}
 
 }

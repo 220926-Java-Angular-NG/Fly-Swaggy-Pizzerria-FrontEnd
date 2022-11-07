@@ -1,10 +1,10 @@
-
-<h1>The Flying Swaggarelli's Pizza Mansion</h1>
-
+<h1>Welcome to the {{title}}</h1>
 <nav>
-  <a routerLink="/register">Register</a>
+    <a routerLink="/login">Login</a>  
+    <a routerLink="/register">Register</a>
+    <a routerLink="/menu">Menu</a>
+    <a routerLink="/cart">cart</a>
 </nav>
-
-<!-- <router-outlet></router-outlet> -->
-<app-verify-user></app-verify-user>
+<app-user-profile></app-user-profile>
+<router-outlet></router-outlet>
 <app-register></app-register>

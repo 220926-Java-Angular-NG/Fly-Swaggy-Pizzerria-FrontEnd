@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { UserService } from 'src/app/services/user.service';
 
 @Component({
   selector: 'app-verify-user',
@@ -8,15 +9,18 @@ import { FormControl, FormGroup } from '@angular/forms';
 })
 
 export class VerifyUserComponent implements OnInit {
+  
+  verifyUser = this.fb.group({
+    lastName: '',
+    email: ''
+ });
 
-  verify = new FormGroup({
-      lastName: new FormControl(''),
-      email: new FormControl('')
-  });
-
-  constructor() { }
+  constructor(
+    private fb:FormBuilder,
+    private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
+  // onClickSubmit(data: string) {this.email = data.email;}
 }
