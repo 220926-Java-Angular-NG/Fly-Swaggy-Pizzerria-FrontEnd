@@ -9,7 +9,7 @@ import { MessagesService } from './messages.service';
 })
 export class UserService {
 
-  private loginURL = 'http://localhost:8080/api/';
+  private loginURL = 'http://localhost:8080/';
   private httpOptions = {
     headers: new HttpHeaders(
       {

@@ -11,26 +11,28 @@ import { PizzaBox } from '../models/pizzaBox';
   styleUrls: ['./cart.component.css']
 })
 export class CartComponent implements OnInit {
-
+  subtotal:number = 0;
 pizzasboxes: PizzaBox[] = []
-
   constructor(private cartService:CartService, private data:DataService) { }
   Purchase(pizzaBoxes: PizzaBox[]){
-    var subtotal:number = 0;
-    var pizzas:Pizza[] = [];
-    pizzaBoxes.forEach(box => {
-      pizzas.push(this.toPizza(box))
-      subtotal = subtotal + box.price;
-    });
-    this.cartService.purchase(pizzas, this.formatter.format(subtotal)).subscribe() // todo: eventually handel not being able to recieve pizza
-    this.pizzasboxes = []; // nuke the cart
-    this.data.changedata(this.pizzasboxes); // nuke the shared data
+    if(this.subtotal > 0){
+      var pizzas:Pizza[] = [];
+      pizzaBoxes.forEach(box => {
+        pizzas.push(this.toPizza(box))
+      });
+      this.cartService.purchase(pizzas, this.formatter.format(this.subtotal)).subscribe() // todo: eventually handel not being able to recieve pizza
+      this.pizzasboxes = []; // nuke the cart
+      this.data.changedata(this.pizzasboxes); // nuke the shared data
+    } else {
+      //todo notify user that cart is empty
+    }
   }
 
   Remove(pizza:PizzaBox){
     const index = this.pizzasboxes.indexOf(pizza,0)
     if(index > -1){
       this.pizzasboxes.splice(index,1);
+      this.subtotal = this.subtotal - pizza.price;
     }
   }
 
@@ -43,6 +45,7 @@ pizzasboxes: PizzaBox[] = []
       if(box.name == ""){ // if the pizza didn't have a name call it custom
         box.name = "Custom"
       }
+      this.subtotal = this.subtotal + box.price;
     })
   }
 
