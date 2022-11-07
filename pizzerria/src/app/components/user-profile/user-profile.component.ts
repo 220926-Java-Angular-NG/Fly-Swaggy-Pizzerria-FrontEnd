@@ -20,20 +20,20 @@ editProfileForm: FormGroup;
 
 constructor(private fb:FormBuilder, private userService: UserService) {
   this.editProfileForm = fb.group({
-    firstName:['', Validators.required],
-    lastName:['', Validators.required],
+    firstName:[''],
+    lastName:[''],
     username:[''],
     password:[''],
-      email:['', Validators.required],
-      phoneNumber:['', Validators.required],
-      address:['', Validators.required],
-      address2:['', Validators.required],
-      zipCode:['', Validators.required]
+      email:[''],
+      phoneNumber:[''],
+      address:[''],
+      address2:[''],
+      zipCode:['']
   });
    }
 
 ngOnInit(): void {
-  this.user = Demo;
+  this.userService.findUser(`${localStorage.getItem("userID")}`).subscribe(init=>this.user=init);
   
 }
 
@@ -44,7 +44,7 @@ getEditProfileForm(){
 saveChanges(): void {
   if(this.user) {
     this.userService.updateUser(this.user).subscribe();
-    console.log(this.user.firstName);
+    console.log(this.user.zipCode);
   }
 }
 
