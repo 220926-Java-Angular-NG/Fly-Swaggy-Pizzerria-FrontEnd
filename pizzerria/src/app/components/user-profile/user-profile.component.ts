@@ -20,14 +20,12 @@ export class UserProfileComponent implements OnInit {
 editProfileForm: FormGroup;
   
 
-constructor(private fb:FormBuilder) {
+constructor(private fb:FormBuilder, private userService: UserService) {
   this.editProfileForm = fb.group({
     firstName:['', Validators.required],
     lastName:['', Validators.required],
-    username:['', Validators.required, Validators.minLength(5)],
-    password:['', Validators.required, Validators.pattern(
-      '^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$'
-      )],
+    username:[''],
+    password:[''],
       email:['', Validators.required],
       phoneNumber:['', Validators.required],
       address:['', Validators.required],
@@ -45,8 +43,12 @@ getEditProfileForm(){
     return this.editProfileForm.controls;
 }
 
-saveChanges(){
-
+saveChanges(): void {
+  if(this.user) {
+    this.userService.updateUser(this.user).subscribe();
+    console.log(this.user.firstName);
+  }
 }
+
 
 }
