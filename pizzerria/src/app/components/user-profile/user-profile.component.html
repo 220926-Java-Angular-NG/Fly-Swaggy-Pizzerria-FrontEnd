@@ -1,0 +1,54 @@
+
+<div class="container" *ngIf="user">
+    <div class="header">
+      <div class="title" >
+        <h2>{{user.username | uppercase}}'s Profile</h2>
+      </div>
+    </div>
+    <hr>
+    <div class = "userInfo">
+        <p>Change user info below! Hit 'Save' button below to confirm changes.</p>
+        <form [formGroup]="editProfileForm">
+            <label for="firstName">First Name: </label>
+            <input id="firstName" type="text" [(ngModel)]="user.firstName" value = {{user.firstName}} formControlName="firstName" required>
+            <br>
+            <br>
+            <label for="lastName">Last Name: </label>
+            <input id="lastName" type="text" [(ngModel)]="user.lastName" formControlName="lastName" required>
+            <br>
+            <br>
+            <label for="username">Username: </label>
+            <input id="username" type="text" [(ngModel)]="user.username" formControlName="username" required>
+            <br>
+            <br>
+            <label for="password">Password: </label>
+            <input id="password" type="password" [(ngModel)]="user.password" formControlName="password" required>
+            <br>
+            <br>
+            <label for="email">Email: </label>
+            <input id="email" type="text" [(ngModel)]="user.email" formControlName="email" required>
+            <br>
+            <br>
+            <label for="phoneNumber">Phone Number: </label>
+            <input id="phoneNumber" type="text" [(ngModel)]="user.phoneNumber" formControlName="phoneNumber" required>
+            <br>
+            <br>
+            <label for="address">Address: </label>
+            <input id="address" type="text" [(ngModel)]="user.address" formControlName="address" required>
+            <br>
+            <br>
+            <label for="address2">Address 2: </label>
+            <input id="address2" type="text" [(ngModel)]="user.address2" formControlName="address2" required>
+            <br>
+            <br>
+            <label for="zipCode">Zip Code: </label>
+            <input id="zipCode" type="text" [(ngModel)]="user.zipCode" formControlName="zipCode" required>
+            <br>
+            <br>
+            <button type="button" (click)="saveChanges()">Save</button>
+        </form>
+
+
+    </div>
+  
+  </div>

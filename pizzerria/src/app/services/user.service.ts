@@ -53,4 +53,8 @@ export class UserService {
     }
   }
 
+  private updateUser(user: User) {
+    return this.http.put(`${this.loginURL}/users/{userId}/profile`, user);
+  }
+
 }
