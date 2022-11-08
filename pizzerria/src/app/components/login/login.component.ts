@@ -3,6 +3,7 @@ import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms'
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/services/user.service';
+import { MessagesService } from 'src/app/services/messages.service';
 import { User } from '../models/user';
 
 @Component({
@@ -20,7 +21,7 @@ export class LoginComponent implements OnInit {
   });
   submitted = false;
   
-  constructor(private fb:FormBuilder, private router:Router, private userService: UserService, private comp: AppComponent){}
+  constructor(private fb:FormBuilder, private router:Router, private userService: UserService, private comp: AppComponent, private message: MessagesService){}
   
   ngOnInit(): void { 
     this.loginForm = this.fb.group({
@@ -29,6 +30,7 @@ export class LoginComponent implements OnInit {
         Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$')]]
     });
     localStorage.clear();
+    this.comp.user = '';
   }
 
    get loginData(){
@@ -40,11 +42,21 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.loginForm.valid){
       this.userService.login(`${this.loginData.username?.value} ${this.loginData.password?.value}`)
-    .subscribe((loggedUser: User) => this.comp.user = `Welcome: ${loggedUser.username}`);
+    .subscribe((loggedUser: User) => this.comp.user = loggedUser.username);
+    this.router.navigate(['/menu']);
     }
   }
+
   register() {
     this.router.navigate(['/register']);
+  }
+
+  clear()
+  {
+    this.loginForm.patchValue({
+      username: '',
+      password: '' 
+    });
   }
 
 }

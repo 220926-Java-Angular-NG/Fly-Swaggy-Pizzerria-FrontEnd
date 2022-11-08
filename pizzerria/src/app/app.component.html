@@ -1,5 +1,5 @@
 <h1>Welcome to the {{title}}</h1>
-<p *ngIf="user">{{user}}</p>
+<p *ngIf="user">Welcome: {{user}}</p>
 <nav>
     <ng-container 
     *ngIf="user; then loggedIn; else loggedOut">

@@ -12,8 +12,8 @@
         <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter password" required>
             <div *ngIf="loginData.password.invalid && (loginData.password.dirty || loginData.password.touched)">
                 <div *ngIf="loginData.password.errors?.['required']">Password is required.</div>
-                <div *ngIf="loginData.password.errors?.['pattern']">Password should have minimum 8 characters, 
-                    at least 1 uppercase letter, 1 lowercase letter and 1 number.</div>
+                <div *ngIf="loginData.password.errors?.['pattern']">Password should be 8-12 characters long, 
+                    including at least 1 number, 1 lowercase and 1 uppercase letter, and 1 special character</div>
             </div>
         </div>
         <div class="form-group">
