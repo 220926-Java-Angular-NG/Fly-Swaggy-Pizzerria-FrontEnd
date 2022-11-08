@@ -1,11 +1,20 @@
 <h1>Welcome to the {{title}}</h1>
 <p *ngIf="user">{{user}}</p>
 <nav>
-    <a routerLink="/login">Login</a>  
-    <a routerLink="/register">Register</a>
-    <a routerLink="/menu">Menu</a>
-    <a routerLink="/cart">cart</a>
-    <a routerLink="/myProfile">My Profile</a>
+    <ng-container 
+    *ngIf="user; then loggedIn; else loggedOut">
+    </ng-container>
+    <ng-template #loggedIn>
+        <a routerLink="/menu">Menu</a>
+        <a routerLink="/cart">cart</a>
+        <a routerLink="/myProfile">My Profile</a>
+    </ng-template>
+    <ng-template #loggedOut>
+        <a routerLink="/login">Login</a>  
+        <a routerLink="/register">Register</a>
+        <a routerLink="/menu">Menu</a>
+        <a routerLink="/cart">cart</a>
+    </ng-template>
 </nav>
 
 <router-outlet></router-outlet>
