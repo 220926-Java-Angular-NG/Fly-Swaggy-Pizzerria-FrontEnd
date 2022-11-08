@@ -1,5 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/services/user.service';
@@ -13,26 +13,35 @@ import { User } from '../models/user';
 export class LoginComponent implements OnInit {
 
   @Input() loggedUser?: User;
-  loginForm = this.fb.group({
-    username:[''],
-    password:['']
+  loginForm = new FormGroup({
+    username: new FormControl('', [Validators.required, Validators.minLength(5)]),
+    password: new FormControl('', [Validators.required, 
+      Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$')])
   });
+  submitted = false;
   
   constructor(private fb:FormBuilder, private router:Router, private userService: UserService, private comp: AppComponent){}
   
   ngOnInit(): void { 
-      localStorage.clear();
-   }
+    this.loginForm = this.fb.group({
+      username: ['', [Validators.required, Validators.minLength(5)]],
+      password: ['', [Validators.required, 
+        Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$')]]
+    });
+    localStorage.clear();
+  }
 
    get loginData(){
     return this.loginForm.controls;
   }
-  
 
-  login() { 
-    this.userService.login(`${this.loginData.username.value} ${this.loginData.password.value}`)
+
+  onSubmit() { 
+    this.submitted = true;
+    if (this.loginForm.valid){
+      this.userService.login(`${this.loginData.username?.value} ${this.loginData.password?.value}`)
     .subscribe((loggedUser: User) => this.comp.user = `Welcome: ${loggedUser.username}`);
-  }
+    }
 
   register() {
     this.router.navigate(['/register']);
