@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
-import { RegisterService } from 'src/app/services/register.service';
-import { Location } from '@angular/common';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
+import { Router } from '@angular/router';
+import { UserService } from 'src/app/services/user.service';
+import { User } from '../models/user';
 
 @Component({
   selector: 'app-register',
@@ -11,22 +11,73 @@ import { FormBuilder, Validators } from '@angular/forms';
 })
 export class RegisterComponent implements OnInit {
 
-  registerForm = this.fb.group({
-    
-    firstName: ['', Validators.required],
-    lastName: [''],
-      street: [''],
-      city: [''],
-      state: [''],
-      zip: ['']
-    });
+  @Input() newUser?: User;
+  submitted = false;
 
-  constructor(private fb:FormBuilder) { 
-  
-   }
+  registerForm = this.fb.group({
+    username: ['', Validators.required],
+    password: [''],
+    firstName: [''],
+    lastName: [''],
+    email: [''],
+    phoneNumber: [''],
+    address: [''],
+    address2: [''],
+    zipCode:['']
+  });
+
+  constructor(private fb:FormBuilder, private router:Router, private userService: UserService) { }
 
   ngOnInit(): void {
   }
-  onSubmit() {}
 
+  get f() {
+    return this.registerForm.controls;
+  }
+
+
+
+  onSubmit() {
+    this.submitted = true;
+    if (this.registerForm.valid) {
+      this.newUser = {
+        userId: 0,
+        username: `${this.f.username.value}`, 
+        password: `${this.f.password.value}`,
+        firstName: `${this.f.firstName.value}`,
+        lastName: `${this.f.lastName.value}`,
+        email: `${this.f.email.value}`,
+        phoneNumber: `${this.f.phoneNumber.value}`,
+        address: `${this.f.address.value}`,
+        address2: `${this.f.address2.value}`,
+        zipCode: `${this.f.zipCode.value}`
+      }
+    
+    this.userService.register(this.newUser).subscribe();
+    this.clear();
+    this.router.navigate(['/login']);
+    } else {
+      return;
+    }
+    
+  }
+
+  login() {
+    this.router.navigate(['/login']);
+  }
+
+  clear()
+  {
+    this.registerForm.patchValue({
+      username: '',
+      password: '',
+      firstName: '',
+      lastName: '',
+      email: '',
+      phoneNumber: '',
+      address: '',
+      address2: '',
+      zipCode:''
+    });
+  }
 }
