@@ -42,7 +42,7 @@ export class LoginComponent implements OnInit {
       this.userService.login(`${this.loginData.username?.value} ${this.loginData.password?.value}`)
     .subscribe((loggedUser: User) => this.comp.user = `Welcome: ${loggedUser.username}`);
     }
-
+  }
   register() {
     this.router.navigate(['/register']);
   }
