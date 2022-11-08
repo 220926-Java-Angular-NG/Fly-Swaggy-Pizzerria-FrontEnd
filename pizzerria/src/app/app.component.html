@@ -1,5 +1,9 @@
 <h1>Welcome to the {{title}}</h1>
+
+<app-dark-mode></app-dark-mode>
+
 <p *ngIf="user">Welcome: {{user}}</p>
+
 <nav>
     <ng-container 
     *ngIf="user; then loggedIn; else loggedOut">
@@ -17,5 +21,7 @@
     </ng-template>
 </nav>
 
+
 <router-outlet></router-outlet>
 <app-messages></app-messages>
+
