@@ -5,6 +5,7 @@ import { MessagesService } from 'src/app/services/messages.service';
 import { Pizza, Size} from '../models/pizza';
 import { PizzaBox } from '../models/pizzaBox';
 import { Cart } from '../models/Cart';
+import { AppComponent } from 'src/app/app.component';
 
 @Component({
   selector: 'app-cart',
@@ -14,7 +15,25 @@ import { Cart } from '../models/Cart';
 export class CartComponent implements OnInit {
   subtotal:number = 0;
   pizzasboxes: PizzaBox[] = []
-  constructor(private cartService:CartService, private data:DataService, private message:MessagesService) { }
+  constructor(private cartService:CartService, private data:DataService, private message:MessagesService, private comp:AppComponent) { }
+
+  ngOnInit(): void {
+    this.data.sharedata.subscribe(box=>this.pizzasboxes=box)
+    this.pizzasboxes.forEach(box => { // if the box comes in without price, price it
+      if(box.price == 0){
+        calculate_price(box)
+      }
+
+      if(box.name == ""){ // if the pizza didn't have a name call it custom
+        box.name = "Custom"
+      }
+      if(this.comp.user != ""){ // they are logged in
+        box.price = box.price * .9;
+      }
+      this.subtotal = this.subtotal + box.price;
+    })
+  }
+
   Purchase(pizzaBoxes: PizzaBox[]){
     if(this.subtotal > 0){
       var pizzas:Pizza[] = [];
@@ -26,7 +45,7 @@ export class CartComponent implements OnInit {
       pizzaBoxes.forEach(box => {
         pizzas.push(this.toPizza(box))
       });
-      this.cartService.purchase(pizzas, this.formatter.format(this.subtotal)).subscribe(response =>ret = response) // todo: eventually handel not being able to recieve pizza
+      this.cartService.purchase(pizzas, this.formatter.format(this.subtotal)).subscribe(response =>ret = response)
       if(ret.pizzas == pizzas){ // purchase was successful
       this.pizzasboxes = []; // nuke the cart
       this.data.changedata(this.pizzasboxes); // nuke the shared data
@@ -47,19 +66,6 @@ export class CartComponent implements OnInit {
       this.pizzasboxes.splice(index,1);
       this.subtotal = this.subtotal - pizza.price;
     }
-  }
-
-  ngOnInit(): void {
-    this.data.sharedata.subscribe(box=>this.pizzasboxes=box)
-    this.pizzasboxes.forEach(box => { // if the box comes in without price, price it
-      if(box.price == 0){
-        calculate_price(box)
-      }
-      if(box.name == ""){ // if the pizza didn't have a name call it custom
-        box.name = "Custom"
-      }
-      this.subtotal = this.subtotal + box.price;
-    })
   }
 
   formatter = new Intl.NumberFormat('en-US',{ // formats price to be displayed
