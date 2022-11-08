@@ -1,38 +1,62 @@
-<p>register works!</p>
 <h3>Please fill the form</h3>
-<div>
-    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
-
-      <label for="username">Username: </label>
-      <input id="username" type="text" formControlName="username" required>
-
-      <label for="password">Password: </label>
-      <input id="password" type="password" formControlName="password" >
+<div class="form-group">
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()" novalidate>
+        <div class="form-group">
+        <label for="username">Username: </label>
+        <input type="text" id="username" class="form-control" formControlName="username" placeholder="Enter username" required>
+            <div *ngIf="f.username.invalid && (f.username.dirty || f.username.touched)">
+                <div *ngIf="f.username.errors?.['required']">Username is required.</div>
+                <div *ngIf="f.username.errors?.['minimum(5)']">Username must be at least 5 characters long.</div>
+            </div>
+        </div>
+      
+      <div class="form-group">
+        <label for="password">Password: </label>
+        <input type="password" id="password" formControlName="password" class="form-control" placeholder="Enter password" required>
+            <div *ngIf="f.password.invalid && (f.password.dirty || f.password.touched)">
+                <div *ngIf="f.password.errors?.['pattern']">Password should have minimum 8 characters, 
+                    at least 1 uppercase letter, 1 lowercase letter and 1 number.</div>
+            </div>
+        </div>
 
       <label for="first-name">First Name: </label>
-      <input id="first-name" type="text" formControlName="firstName" >
+      <input id="first-name" type="text" formControlName="firstName" placeholder="Enter your first name">
     
       <label for="last-name">Last Name: </label>
-      <input id="last-name" type="text" formControlName="lastName">
+      <input id="last-name" type="text" formControlName="lastName" placeholder="Enter your last name">
       
-      <label for="email">Email: </label>
-      <input id="email" type="email" formControlName="email" >
+      
+      <div class="form-group">
+        <label for="email">Email: </label>
+        <input type="email" id="email" formControlName="email" class="form-control" placeholder="someone@domain.com" >
+        <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                <div *ngIf="f.email.errors?.['email']">Please enter your email in an appropriate format</div>
+                </div>
+        </div>
     
-      <label for="phone-number">Phone Number: </label>
-      <input id="phone-number" type="text" formControlName="phoneNumber">
+      
+      <div class="form-group">
+        <label for="phone-number">Phone Number: </label>
+        <input type="text" id="phone-number" formControlName="phoneNumber" class="form-control" placeholder="Enter you phone number" >
+            <div *ngIf="f.phoneNumber.invalid && (f.phoneNumber.dirty || f.phoneNumber.touched)">
+                <div *ngIf="f.phoneNumber.errors?.['pattern']">Please use only numbers</div>
+                <div *ngIf="f.phoneNumber.errors?.['maxLength']">Your phone number should contain only 10 digits</div>
+            </div>
+        </div>
       
       
-      <label for="address">Address: </label>
-      <input id="address" type="text" formControlName="address">
+        <label for="address">Address: </label>
+        <input id="address" type="text" formControlName="address" placeholder="Enter your address">
   
-      <label for="address2">Apt: </label>
-      <input id="address2" type="text" formControlName="address2">
+        <label for="address2">Apt: </label>
+        <input id="address2" type="text" formControlName="address2" placeholder="Not required">
   
-      <label for="zip">Zip Code: </label>
-      <input id="zip" type="text" formControlName="zipCode">
+        <label for="zip">Zip Code: </label>
+        <input id="zip" type="text" formControlName="zipCode" placeholder="Your zip code">
       
-      <p>Complete the form to enable button.</p>
-      <button type="submit" [disabled]="!registerForm.valid">Submit</button>
-      <button type="button" (click)="login()">Login</button>
-      </form>
+        <div>
+        <button type="submit" [disabled]="!registerForm.valid">Submit</button>
+        <button type="button" (click)="login()">Login</button>
+        </div>
+    </form>
 </div>

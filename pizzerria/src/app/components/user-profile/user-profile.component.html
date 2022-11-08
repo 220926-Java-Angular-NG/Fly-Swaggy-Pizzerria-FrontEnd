@@ -10,11 +10,11 @@
         <p>Change user info below! Hit 'Save' button below to confirm changes.</p>
         <form [formGroup]="editProfileForm" (ngSubmit) = "saveChanges()">
             <label for="firstName">First Name: </label>
-            <input id="firstName" type="text" [(ngModel)]="user.firstName" value = {{user.firstName}} formControlName="firstName" required>
+            <input id="firstName" type="text" *ngModel="user.firstName" value = {{user.firstName}} formControlName="firstName" required>
             <br>
             <br>
             <label for="lastName">Last Name: </label>
-            <input id="lastName" type="text" [(ngModel)]="user.lastName" formControlName="lastName" required>
+            <input id="lastName" type="text" *ngModel="user.lastName" formControlName="lastName" required>
             <br>
             <br>
             <label for="username">Username: </label>
