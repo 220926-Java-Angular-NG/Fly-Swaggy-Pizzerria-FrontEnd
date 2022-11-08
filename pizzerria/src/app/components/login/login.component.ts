@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   login() { 
     this.userService.login(`${this.loginData.username.value} ${this.loginData.password.value}`)
-    .subscribe((loggedUser: User) => this.comp.user = loggedUser.username);
+    .subscribe((loggedUser: User) => this.comp.user = `Welcome: ${loggedUser.username}`);
   }
 
   register() {

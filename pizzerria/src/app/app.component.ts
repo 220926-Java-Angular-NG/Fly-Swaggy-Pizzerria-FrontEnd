@@ -7,5 +7,5 @@ import { DataService } from './services/dataService/data.service';
 })
 export class AppComponent {
   title = 'Fly and Swaggy Pizzeria';
-  user = localStorage.getItem("token")
+  user = "";
 }
