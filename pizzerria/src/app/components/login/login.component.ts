@@ -48,4 +48,12 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
+  clear()
+  {
+    this.loginForm.patchValue({
+      username: '',
+      password: '' 
+    });
+  }
+
 }
