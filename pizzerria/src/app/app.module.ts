@@ -12,6 +12,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { VerifyUserComponent } from './components/verify-user/verify-user.component';
 import { PasswordResetComponent } from './components/password-reset/password-reset.component';
 import { UserProfileComponent } from './components/user-profile/user-profile.component';
+import { DarkModeComponent } from './components/dark-mode/dark-mode.component';
 
 @NgModule({
   declarations: [
@@ -23,7 +24,8 @@ import { UserProfileComponent } from './components/user-profile/user-profile.com
     MessagesComponent,
     CartComponent,
     MenuComponent,
-    UserProfileComponent
+    UserProfileComponent,
+    DarkModeComponent
   ],
   imports: [
     BrowserModule,
