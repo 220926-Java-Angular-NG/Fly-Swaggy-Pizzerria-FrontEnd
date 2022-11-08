@@ -15,7 +15,7 @@ import { AppComponent } from 'src/app/app.component';
 export class CartComponent implements OnInit {
   subtotal:number = 0;
   pizzasboxes: PizzaBox[] = []
-  constructor(private cartService:CartService, private data:DataService, private message:MessagesService, private comp:AppComponent) { }
+  constructor(private cartService:CartService, private data:DataService, private message:MessagesService, public comp:AppComponent) { }
 
   ngOnInit(): void {
     this.data.sharedata.subscribe(box=>this.pizzasboxes=box)
@@ -28,9 +28,10 @@ export class CartComponent implements OnInit {
         box.name = "Custom"
       }
       if(this.comp.user != ""){ // they are logged in
-        box.price = box.price * .9;
+        this.subtotal = this.subtotal + box.price*.9;
+      }else { 
+        this.subtotal = this.subtotal + box.price;
       }
-      this.subtotal = this.subtotal + box.price;
     })
   }
 
@@ -45,15 +46,18 @@ export class CartComponent implements OnInit {
       pizzaBoxes.forEach(box => {
         pizzas.push(this.toPizza(box))
       });
-      this.cartService.purchase(pizzas, this.formatter.format(this.subtotal)).subscribe(response =>ret = response)
-      if(ret.pizzas == pizzas){ // purchase was successful
-      this.pizzasboxes = []; // nuke the cart
-      this.data.changedata(this.pizzasboxes); // nuke the shared data
-      this.subtotal = 0;
-      this.message.add("Purchase recieved");
-      } else{
-        this.message.add("Order could not be fufilled, Not enough Ingredients");
-      }
+      this.cartService.purchase(pizzas, this.formatter.format(this.subtotal)).subscribe(response => {
+        ret.pizzas = response.pizzas;
+        console.log(ret.pizzas)
+        if(ret.pizzas.length > 0){ // purchase was successful
+          this.pizzasboxes = []; // nuke the cart
+          this.data.changedata(this.pizzasboxes); // nuke the shared data
+          this.subtotal = 0;
+          this.message.add("Purchase recieved");
+          } else{
+            this.message.add("Order could not be fufilled, Not enough Ingredients");
+          }
+      })
     } else {
       //todo message user that cart is empty
       this.message.add("Can't buy nothing");
