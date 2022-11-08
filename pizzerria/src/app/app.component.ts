@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-
+import { DataService } from './services/dataService/data.service';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -7,5 +7,5 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Fly and Swaggy Pizzeria';
-  user = localStorage.getItem("token");
+  user = localStorage.getItem("token")
 }

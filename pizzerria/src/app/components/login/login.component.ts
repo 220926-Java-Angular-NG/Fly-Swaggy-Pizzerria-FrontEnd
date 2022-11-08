@@ -1,9 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder } from '@angular/forms';
 import { Router } from '@angular/router';
+import { AppComponent } from 'src/app/app.component';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../models/user';
-
 
 @Component({
   selector: 'app-login',
@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
     password:['']
   });
   
-  constructor(private fb:FormBuilder, private router:Router, private userService: UserService){}
+  constructor(private fb:FormBuilder, private router:Router, private userService: UserService, private comp: AppComponent){}
   
   ngOnInit(): void { 
 
@@ -32,7 +32,7 @@ export class LoginComponent implements OnInit {
 
   login() { 
     this.userService.login(`${this.loginData.username.value} ${this.loginData.password.value}`)
-    .subscribe((loggedUser: User) => localStorage.setItem("currentUser", JSON.stringify(loggedUser)));
+    .subscribe((loggedUser: User) => this.comp.user = loggedUser.username);
   }
 
   register() {
