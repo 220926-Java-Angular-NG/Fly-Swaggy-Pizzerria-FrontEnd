@@ -14,7 +14,8 @@
         </ul>
         <button type="button" (click)="Remove(pizza)">X</button>
     </li>
-    <p>{{formatter.format(subtotal)}}</p>
+    <p *ngIf="this.comp.user">Member Discount applied Original price: {{formatter.format(subtotal/.9)}}</p>
+    <p>Subtotal: {{formatter.format(subtotal)}}</p>
     <button type="button" class="buy" title="buy" (click)="Purchase(pizzasboxes)">Purchase</button>
     <br>
     <br>

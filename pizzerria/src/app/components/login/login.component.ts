@@ -42,8 +42,12 @@ export class LoginComponent implements OnInit {
     this.submitted = true;
     if (this.loginForm.valid){
       this.userService.login(`${this.loginData.username?.value} ${this.loginData.password?.value}`)
-    .subscribe((loggedUser: User) => this.comp.user = loggedUser.username);
-    this.router.navigate(['/menu']);
+    .subscribe((loggedUser: User) => {
+      this.comp.user = loggedUser.username
+      if(this.comp.user){
+        this.router.navigate(['/menu'])
+      }
+    });
     }
   }
 
