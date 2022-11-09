@@ -30,6 +30,7 @@
         <label for="email">Email: </label>
         <input type="email" id="email" formControlName="email" class="form-control" placeholder="someone@domain.com" >
         <div *ngIf="f.email.invalid && (f.email.dirty || f.email.touched)">
+                <div *ngIf="f.email.errors?.['required']">Email is required.</div>
                 <div *ngIf="f.email.errors?.['email']">Please enter your email in an appropriate format</div>
                 </div>
         </div>

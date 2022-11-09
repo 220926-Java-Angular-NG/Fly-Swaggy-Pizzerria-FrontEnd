@@ -11,6 +11,7 @@ import { User } from '../models/user';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   @Input() loggedUser?: User;
@@ -37,7 +38,6 @@ export class LoginComponent implements OnInit {
     return this.loginForm.controls;
   }
 
-
   onSubmit() { 
     this.submitted = true;
     if (this.loginForm.valid){
@@ -53,6 +53,10 @@ export class LoginComponent implements OnInit {
 
   register() {
     this.router.navigate(['/register']);
+  }
+
+  forgotPass() {
+    this.router.navigate(['/verify']);
   }
 
   clear()
