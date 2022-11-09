@@ -4,6 +4,7 @@ import { Router } from '@angular/router';
 import { UserService } from 'src/app/services/user.service';
 import { User } from '../models/user';
 import { AppComponent } from 'src/app/app.component';
+import { MessagesService } from 'src/app/services/messages.service';
 
 
 
@@ -23,7 +24,7 @@ export class PasswordResetComponent implements OnInit {
   });
 
   
-  constructor(private fb:FormBuilder, private userService: UserService, private router:Router, public comp: AppComponent) { 
+  constructor(private fb:FormBuilder, private userService: UserService, private router:Router, public comp: AppComponent, private message: MessagesService) { 
 
   }
 
@@ -44,11 +45,32 @@ export class PasswordResetComponent implements OnInit {
   onSubmit(){
     if(this.newPassInfo.newPass?.value == this.newPassInfo.confirmPass?.value) {
       this.comp.demoUser.password = `${this.newPassInfo.newPass.value}`;
-      this.userService.updateUser(this.comp.demoUser).subscribe();
-      console.log(this.comp.demoUser.password);
+      this.userService.updateUser(this.comp.demoUser).subscribe(() => {     
+      this.comp.demoUser ={
+        userId: 0,
+        username: '',
+        password: '',
+        firstName: '',
+        lastName: '',
+        email: '',
+        phoneNumber: '',
+        address: '',
+        address2: '',
+        zipCode:''
+      }
       localStorage.clear();
       this.router.navigate(['/login']);
+    });
+    } else{
+      this.message.add("Passwods didn't match")
+      this.clear();
     }
+  }
+  clear(){
+    this.changePassword.patchValue({
+      newPass: '',
+      confirmPass: '' 
+    });
   }
 }
 
