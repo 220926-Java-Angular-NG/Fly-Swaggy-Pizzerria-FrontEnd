@@ -48,7 +48,8 @@ export class VerifyUserComponent implements OnInit {
     this.submitted = true;
     if (this.verifyUser.valid){
       this.userService.verify(`${this.verify.username?.value} ${this.verify.email?.value}`)
-    .subscribe((user: User) => this.comp.user = user.username);
+    .subscribe((user: User) => {this.comp.demoUser = user;
+    console.log(this.comp.demoUser.firstName)});
     this.router.navigate(['/password-reset']);
     }
   }
