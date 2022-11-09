@@ -1,0 +1,31 @@
+ <div>
+     <h2>Forgot your password?</h2>
+     <br>
+     <br>
+     <p>Fill out information to verify your account below!</p>
+     <br>
+     <br>
+     <div>
+     <form [formGroup] = "verifyUser" (ngSubmit)="onSubmit()" novalidate>
+          <label for="username">Username: </label>
+          <input required type="text" formControlName = "username">
+          <div *ngIf="verify.username.invalid && (verify.username.dirty || verify.username.touched)">
+          <div *ngIf="verify.username.errors?.['required']">Username is required.</div>
+          </div>
+               <br>
+               <br>
+          <label for="email">Email: </label>
+          <input required type="text" id="email" formControlName = "email">
+          <div *ngIf="verify.email.invalid && (verify.email.dirty || verify.email.touched)">
+               <div *ngIf="verify.email.errors?.['required']">Email is required.</div>
+               <div *ngIf="verify.email.errors?.['email']">Please enter your email in an appropriate format</div>
+          </div>
+               <br>
+               <br>
+          <button type="submit" id="verification-button" [disabled]="!verifyUser.valid">Find User</button>
+     </form>
+     </div>
+</div>
+
+
+

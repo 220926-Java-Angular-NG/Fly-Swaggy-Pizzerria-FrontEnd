@@ -1,0 +1,22 @@
+<p>cart works!</p>
+
+<ul class="Cart">
+    <li *ngFor="let pizza of pizzasboxes">
+        <p>{{pizza.name}}</p>
+        <P>{{formatter.format(pizza.price)}}</P>
+        <p>{{pizza.size.toLowerCase()}}</p>
+        <p>{{pizza.crust.toLowerCase().replace('_',' ')}}</p>
+        <p>{{pizza.recipe.sauce.toLowerCase()}}</p>
+        <ul class="Cart">
+            <li *ngFor="let topping of pizza.recipe.toppings">
+                <p>{{topping.toLowerCase().replace('fs_seasoning', 'Fly and Swaggy Sauce')}}</p>
+            </li>
+        </ul>
+        <button type="button" (click)="Remove(pizza)">X</button>
+    </li>
+    <p *ngIf="this.comp.user">Member Discount applied Original price: {{formatter.format(subtotal/.9)}}</p>
+    <p>Subtotal: {{formatter.format(subtotal)}}</p>
+    <button type="button" class="buy" title="buy" (click)="Purchase(pizzasboxes)">Purchase</button>
+    <br>
+    <br>
+</ul>
