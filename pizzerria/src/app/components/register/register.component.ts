@@ -18,7 +18,7 @@ export class RegisterComponent implements OnInit {
       Validators.pattern('^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%^&*_=+-]).{8,12}$')]),
     firstName: new FormControl(''),
     lastName: new FormControl(''),
-    email: new FormControl('', Validators.email),
+    email: new FormControl('', [Validators.required, Validators.email]),
     phoneNumber: new FormControl('', [Validators.pattern('[0-9]{10}') ,Validators.maxLength(10)]),
     address: new FormControl(''),
     address2: new FormControl(''),

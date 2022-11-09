@@ -66,7 +66,12 @@ private httpOptions = {
  
   public findUser(userID?:String): Observable<any>{
     return this.http.get(`${this.loginURL}users/${userID}`, this.httpOptions).pipe(tap(_ => this.log(`found user with ID: ${userID}`)),
-    catchError(this.handleError<any>(`updateUser`)));
+    catchError(this.handleError<any>(`findUser`)));
+  }
+
+  public findUserByUsername(username?:String): Observable<any>{
+    return this.http.get(`${this.loginURL}users/findBy/${username}`, this.httpOptions).pipe(tap(_ => this.log(`found user with username: ${username}`)),
+    catchError(this.handleError<any>(`findUserByUsername`)));
   }
 
 }

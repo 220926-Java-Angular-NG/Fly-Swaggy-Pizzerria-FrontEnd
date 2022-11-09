@@ -11,6 +11,7 @@ import { User } from '../models/user';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.css']
 })
+
 export class LoginComponent implements OnInit {
 
   @Input() loggedUser?: User;
@@ -36,7 +37,6 @@ export class LoginComponent implements OnInit {
    get loginData(){
     return this.loginForm.controls;
   }
-
 
   onSubmit() { 
     this.submitted = true;
