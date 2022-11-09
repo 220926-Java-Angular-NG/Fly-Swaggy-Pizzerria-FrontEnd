@@ -29,6 +29,8 @@ export class VerifyUserComponent implements OnInit {
       username: ['', [Validators.required, Validators.minLength(5)]],
       email: ['', [Validators.required, Validators.email]]
     });
+    localStorage.clear();
+    this.comp.user = '';
   }
 
   get verify(){
@@ -37,15 +39,15 @@ export class VerifyUserComponent implements OnInit {
 
   clear() {
     this.verifyUser.patchValue({
-      username: this.verify.username.value,
-      email: this.verify.email.value 
+      username: '',
+      email: '' 
     });
   }
 
   onSubmit() { 
     this.submitted = true;
     if (this.verifyUser.valid){
-      this.userService.findUserByUsername(`${this.verify.username?.value}`)
+      this.userService.verify(`${this.verify.username?.value} ${this.verify.email?.value}`)
     .subscribe((user: User) => this.comp.user = user.username);
     this.router.navigate(['/password-reset']);
     }

@@ -51,6 +51,10 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
+  forgotPass() {
+    this.router.navigate(['/verify']);
+  }
+
   clear()
   {
     this.loginForm.patchValue({

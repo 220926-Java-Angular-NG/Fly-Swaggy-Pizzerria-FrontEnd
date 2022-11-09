@@ -24,7 +24,6 @@ private httpOptions = {
 
   login(credentials: string): Observable<User> {
 
-
    return this.http.post<User>(`${this.loginURL}users/login`, credentials, this.httpOptions)
    .pipe(
       tap( (loggedUser: User) => localStorage.setItem("userId", `${loggedUser.userId}`)),
@@ -70,8 +69,18 @@ private httpOptions = {
   }
 
   public findUserByUsername(username?:String): Observable<any>{
-    return this.http.get(`${this.loginURL}users/findBy/${username}`, this.httpOptions).pipe(tap(_ => this.log(`found user with username: ${username}`)),
+    return this.http.get(`${this.loginURL}users/findBy/${username}`, this.httpOptions)
+    .pipe(tap(_ => this.log(`found user with username: ${username}`)),
     catchError(this.handleError<any>(`findUserByUsername`)));
   }
+
+  verify(credentials: string): Observable<User> {
+
+    return this.http.post<User>(`${this.loginURL}users/verify`, credentials, this.httpOptions)
+    .pipe(
+       tap( (user: User) => localStorage.setItem("userId", `${user.userId}`)),
+       catchError(this.handleError<User>('verify')) 
+    );
+   }
 
 }
