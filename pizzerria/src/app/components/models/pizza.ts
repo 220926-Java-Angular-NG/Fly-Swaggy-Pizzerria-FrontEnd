@@ -28,14 +28,14 @@ export const enum Sauce{
 
 export const enum Topping{
     PEPPERONI = "PEPPERONI",
-    SAUSAGE = "SASUAGE",
+    SAUSAGE = "SAUSAGE",
     MUSHROOMS = "MUSHROOMS",
     BACON = "BACON",
     CHICKEN = "CHICKEN",
     ONIONS = "ONIONS",
     BELL_PEPPERS = "BELL_PEPPERS",
     PINEAPPLE = "PINEAPPLE",
-    JALAPENOS = "JALSPENOS",
+    JALAPENOS = "JALAPENOS",
     HAM = "HAM",
     FS_SEASONING = "FS_SEASONING"
 }

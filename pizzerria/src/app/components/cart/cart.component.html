@@ -9,7 +9,7 @@
         <p>{{pizza.recipe.sauce.toLowerCase()}}</p>
         <ul class="Cart">
             <li *ngFor="let topping of pizza.recipe.toppings">
-                <p>{{topping.toLowerCase().replace('fs_seasoning', 'Fly and Swaggy Sauce')}}</p>
+                <p>{{topping.toLowerCase().replace('fs_seasoning', 'Fly and Swaggy Sauce').replace('_', ' ')}}</p>
             </li>
         </ul>
         <button type="button" (click)="Remove(pizza)">X</button>
