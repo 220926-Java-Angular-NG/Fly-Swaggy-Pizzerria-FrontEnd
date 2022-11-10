@@ -2,24 +2,47 @@ import { Recipe } from "./Recipe";
 import { Sauce, Topping } from "./pizza";
 export const SPECALTY: Recipe[] = [
     {
-        name: "Swag Standard",
+        name: "The Swaggadocious",
         sauce: Sauce.TOMATO,
         toppings:[
             Topping.PEPPERONI,
             Topping.BACON,
+            Topping.BELL_PEPPERS,
+            Topping.JALAPENOS,
             Topping.FS_SEASONING
         ]
     },
     {
-        name: "BBQ Day",
+        name: "Pepperoni",
         sauce: Sauce.TOMATO,
+        toppings:[
+            Topping.PEPPERONI,
+            Topping.BACON
+        ]
+    },
+    {
+        name: "Cheese",
+        sauce: Sauce.TOMATO,
+        toppings:[]
+    },
+    {
+        name: "BBQ Day",
+        sauce: Sauce.BBQ,
         toppings:[
             Topping.BACON,
             Topping.CHICKEN
         ]
     },
     {
-        name: "MEAT",
+        name: "Buffalo Chicken",
+        sauce: Sauce.BUFFALO,
+        toppings:[
+            Topping.BACON,
+            Topping.CHICKEN
+        ]
+    },
+    {
+        name: "Meat Supreme",
         sauce: Sauce.TOMATO,
         toppings:[
             Topping.PEPPERONI,
@@ -30,27 +53,30 @@ export const SPECALTY: Recipe[] = [
         ]
     },
     {
-        name: "Swag Standard",
+        name: "Veggie Deluxe",
         sauce: Sauce.TOMATO,
         toppings:[
-            Topping.PEPPERONI,
-            Topping.BACON
+            Topping.MUSHROOMS,
+            Topping.ONIONS,
+            Topping.BELL_PEPPERS,
+            Topping.JALAPENOS
         ]
     },
     {
-        name: "Swag Standard",
+        name: "Hawaiian",
         sauce: Sauce.TOMATO,
         toppings:[
-            Topping.PEPPERONI,
-            Topping.BACON
+            Topping.HAM,
+            Topping.BACON,
+            Topping.PINEAPPLE
         ]
     },
     {
-        name: "Swag Standard",
-        sauce: Sauce.TOMATO,
+        name: "White Sauce",
+        sauce: Sauce.ALFREDO,
         toppings:[
-            Topping.PEPPERONI,
-            Topping.BACON
+            Topping.CHICKEN,
+            Topping.ONIONS
         ]
     }
 ]
